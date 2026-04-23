@@ -1,0 +1,58 @@
+:root {
+    --primary: #db7093;
+    --primary-dark: #c71585;
+    --primary-light: #fce7f3;
+    --secondary: #1f2937;
+    --accent: #fdf2f8;
+    --text-main: #374151;
+    --text-light: #6b7280;
+    --bg-body: #fffbfb;
+    --white: #ffffff;
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: var(--bg-body); color: var(--text-main); overflow-x: hidden; }
+
+/* HEADER */
+.top-announcement { background: var(--primary); color: white; text-align: center; padding: 8px; font-size: 12px; font-weight: 600; }
+header { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 1000; box-shadow: var(--shadow-sm); }
+.nav-container { max-width: 1300px; margin: 0 auto; padding: 15px 25px; display: flex; align-items: center; justify-content: space-between; }
+.logo { font-family: 'Playfair Display', serif; font-size: 24px; color: var(--primary); text-decoration: none; display: flex; align-items: center; gap: 10px; }
+.logo img { height: 38px; }
+
+.search-wrap { flex: 0 1 400px; position: relative; margin: 0 40px; display: flex; }
+.search-input { width: 100%; padding: 10px 20px; padding-right: 45px; border-radius: 50px; border: 1px solid #e5e7eb; background: #f9fafb; font-size: 14px; transition: var(--transition); }
+.search-icon { position: absolute; right: 15px; top: 50%; transform: translateY(-50%); color: var(--text-light); border: none; background: none; cursor: pointer; }
+
+.nav-menu { display: flex; gap: 30px; }
+.nav-link { text-decoration: none; color: var(--text-main); font-weight: 600; font-size: 14px; transition: var(--transition); position: relative; }
+.nav-link:hover { color: var(--primary); }
+
+.nav-actions { display: flex; align-items: center; gap: 20px; }
+.icon-btn { color: var(--text-main); text-decoration: none; position: relative; transition: var(--transition); display: flex; align-items: center; }
+.badge { position: absolute; top: -8px; right: -10px; background: var(--primary-dark); color: white; font-size: 10px; font-weight: 800; padding: 2px 6px; border-radius: 50px; border: 2px solid white; }
+
+/* PRODUCT CARDS */
+.products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 30px; max-width: 1300px; margin: 0 auto; }
+.product-card { background: white; border-radius: 12px; overflow: hidden; transition: var(--transition); border: 1px solid #f3f4f6; position: relative; display: flex; flex-direction: column; height: 100%; }
+.product-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.08); }
+.product-media { position: relative; padding-top: 110%; overflow: hidden; background: #fdf2f8; cursor: pointer; }
+.product-media img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
+.product-info { padding: 20px; flex-grow: 1; display: flex; flex-direction: column; }
+.product-title { font-weight: 700; font-size: 16px; color: var(--secondary); margin-bottom: 8px; line-height: 1.4; height: 44px; overflow: hidden; }
+.product-price { font-size: 18px; font-weight: 800; color: var(--primary); margin-bottom: 15px; }
+
+.action-btn { background: var(--primary); color: white; padding: 12px; border-radius: 12px; text-decoration: none; font-weight: 700; font-size: 14px; text-align: center; transition: 0.3s; border: none; cursor: pointer; display: block; }
+.btn-outline { background: white; color: var(--primary); border: 2px solid var(--primary); }
+
+/* FOOTER */
+footer { background: var(--secondary); color: #9ca3af; padding: 80px 25px 30px; margin-top: 100px; }
+.footer-grid { max-width: 1300px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 50px; }
+.footer-title { color: white; font-size: 18px; font-weight: 700; margin-bottom: 25px; }
+.footer-list { list-style: none; }
+.footer-item { margin-bottom: 15px; font-size: 14px; transition: var(--transition); cursor: pointer; }
+.footer-item:hover { color: var(--primary); transform: translateX(5px); }
+.footer-bottom { max-width: 1300px; margin: 60px auto 0; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.05); text-align: center; font-size: 13px; }
