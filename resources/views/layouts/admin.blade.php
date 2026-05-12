@@ -6,7 +6,7 @@
     <title>Admin Dashboard - Gantol.In</title>
     
     <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -14,202 +14,151 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     
     <style>
+        * {
+            box-sizing: border-box;
+        }
+        
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
             background-color: #f8fafc;
             color: #334155;
-            -webkit-font-smoothing: antialiased;
+            margin: 0;
         }
         
-        /* Sidebar Styling */
         #sidebar {
-            width: 270px;
-            background-color: #ffffff;
-            border-right: 1px solid #f1f5f9;
+            width: 260px;
+            height: 100vh;
             position: fixed;
-            top: 0;
-            bottom: 0;
             left: 0;
-            z-index: 100;
-            padding: 30px 24px;
-            display: flex;
-            flex-direction: column;
+            top: 0;
+            background: #fff;
+            border-right: 1px solid #e2e8f0;
+            padding: 2rem 1.5rem;
+            z-index: 1000;
+            overflow-y: auto;
         }
         
+        #main-content {
+            margin-left: 260px;
+            padding: 2rem;
+            min-height: 100vh;
+        }
+
         .brand-logo {
-            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
             font-weight: 800;
-            font-size: 26px;
             color: #0f172a;
             text-decoration: none;
             display: flex;
             align-items: center;
-            gap: 10px;
-            margin-bottom: 50px;
-        }
-        
-        .brand-logo:hover {
-            color: #db7093;
-        }
-        
-        .brand-badge {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 10px;
-            background-color: #db7093;
-            color: white;
-            padding: 4px 8px;
-            border-radius: 6px;
-            font-weight: 700;
-            letter-spacing: 1px;
+            gap: 0.5rem;
+            margin-bottom: 2.5rem;
         }
 
-        .nav-heading {
-            font-size: 11px;
-            font-weight: 700;
-            color: #94a3b8;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            margin-bottom: 15px;
-            padding-left: 12px;
-        }
-
-        .sidebar-nav-item {
-            padding: 12px 16px;
+        .nav-link-admin {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1rem;
             color: #64748b;
             text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            border-radius: 10px;
+            border-radius: 0.75rem;
             font-weight: 600;
-            font-size: 14px;
-            transition: all 0.2s ease;
-            margin-bottom: 6px;
+            margin-bottom: 0.5rem;
+            transition: all 0.2s;
         }
 
-        .sidebar-nav-item:hover {
-            background-color: #f8fafc;
+        .nav-link-admin:hover {
+            background: #f1f5f9;
             color: #0f172a;
-            transform: translateX(4px);
         }
 
-        .sidebar-nav-item.active {
-            background-color: #fff1f2;
+        .nav-link-admin.active {
+            background: #fff1f2;
             color: #db7093;
+        }
+
+        .nav-section-title {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05rem;
             font-weight: 700;
+            color: #94a3b8;
+            margin: 1.5rem 0 0.75rem 1rem;
         }
 
-        .sidebar-nav-item i {
-            font-size: 20px;
+        @media (max-width: 992px) {
+            #sidebar {
+                transform: translateX(-100%);
+                transition: transform 0.3s ease-in-out;
+            }
+            #sidebar.show {
+                transform: translateX(0);
+            }
+            #main-content {
+                margin-left: 0;
+            }
+            .mobile-header {
+                display: flex !important;
+            }
         }
 
-        /* Main Content Styling */
-        #main-wrapper {
-            margin-left: 270px;
-            padding: 30px 50px;
+        .mobile-header {
+            display: none;
+            background: #fff;
+            padding: 1rem;
+            border-bottom: 1px solid #e2e8f0;
+            position: sticky;
+            top: 0;
+            z-index: 900;
         }
-
-        /* Top Bar */
-        .top-bar {
-            margin-bottom: 45px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: rgba(255, 255, 255, 0.6);
-            backdrop-filter: blur(10px);
-            padding: 15px 30px;
-            border-radius: 16px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
-            border: 1px solid #ffffff;
-        }
-
-        .user-avatar {
-            width: 44px;
-            height: 44px;
-            border-radius: 12px;
-            background-color: #fff1f2;
-            color: #db7093;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 800;
-            font-size: 15px;
-        }
-
-        /* Helpers */
-        .text-accent { color: #db7093; }
-        .bg-accent { background-color: #db7093; }
-        .btn-accent { 
-            background-color: #db7093; 
-            color: white; 
-            font-weight: 600;
-            border: none;
-            transition: 0.2s;
-        }
-        .btn-accent:hover {
-            background-color: #be185d;
-            color: white;
-            transform: translateY(-2px);
-        }
-
-        @yield('styles')
     </style>
+    @yield('styles')
 </head>
 <body>
 
+    <!-- Mobile Header -->
+    <div class="mobile-header d-flex justify-content-between align-items-center">
+        <a href="#" class="fw-bold text-dark text-decoration-none">Gantol.In</a>
+        <button class="btn btn-light" type="button" onclick="document.getElementById('sidebar').classList.toggle('show')">
+            <i class="bi bi-list fs-4"></i>
+        </button>
+    </div>
+
     <!-- Sidebar -->
     <nav id="sidebar">
-        <a href="#" class="brand-logo">
-            Gantol.In <span class="brand-badge">PRO</span>
+        <a href="{{ route('admin.dashboard') }}" class="brand-logo">
+            <i class="bi bi-bag-heart-fill text-danger"></i> Gantol.In
         </a>
 
-        <div class="mb-4">
-            <div class="nav-heading">Katalog</div>
-            <a href="{{ route('admin.dashboard') }}" class="sidebar-nav-item {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
-                <i class="bi bi-grid-1x2"></i> Semua Produk
-            </a>
-            <a href="{{ route('admin.products.create') }}" class="sidebar-nav-item {{ request()->routeIs('admin.products.create') ? 'active' : '' }}">
-                <i class="bi bi-plus-square"></i> Tambah Produk
-            </a>
-        </div>
+        <div class="nav-section-title">Menu Utama</div>
+        <a href="{{ route('admin.dashboard') }}" class="nav-link-admin {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
+            <i class="bi bi-grid"></i> Dashboard
+        </a>
+        
+        <div class="nav-section-title">Transaksi</div>
+        <a href="{{ route('admin.orders') }}" class="nav-link-admin {{ request()->routeIs('admin.orders') ? 'active' : '' }}">
+            <i class="bi bi-cart-check"></i> Pesanan Masuk
+        </a>
+        <a href="{{ route('admin.reports') }}" class="nav-link-admin {{ request()->routeIs('admin.reports') ? 'active' : '' }}">
+            <i class="bi bi-graph-up-arrow"></i> Laporan
+        </a>
 
-        <div class="mb-4">
-            <div class="nav-heading">Transaksi</div>
-            <a href="{{ route('admin.orders') }}" class="sidebar-nav-item {{ request()->routeIs('admin.orders') ? 'active' : '' }}">
-                <i class="bi bi-cart3"></i> Pesanan Masuk
-            </a>
-            <a href="{{ route('admin.reports') }}" class="sidebar-nav-item {{ request()->routeIs('admin.reports') ? 'active' : '' }}">
-                <i class="bi bi-bar-chart"></i> Laporan Jualan
-            </a>
-        </div>
+        <div class="nav-section-title">Katalog</div>
+        <a href="{{ route('admin.products.create') }}" class="nav-link-admin {{ request()->routeIs('admin.products.create') ? 'active' : '' }}">
+            <i class="bi bi-plus-circle"></i> Tambah Produk
+        </a>
 
-        <div class="mt-auto">
-            <a href="{{ url('/') }}" class="sidebar-nav-item text-danger">
+        <div style="margin-top: auto; padding-top: 2rem;">
+            <a href="{{ url('/') }}" class="nav-link-admin text-danger">
                 <i class="bi bi-box-arrow-left"></i> Keluar Panel
             </a>
         </div>
     </nav>
 
     <!-- Main Content -->
-    <div id="main-wrapper">
-        <header class="top-bar">
-            <div>
-                <h1 class="h4 fw-bold text-dark mb-1">Dashboard Administrator</h1>
-                <p class="text-secondary small mb-0">Selamat bekerja kembali, Admin!</p>
-            </div>
-            
-            <div class="d-flex align-items-center gap-3">
-                <div class="text-end d-none d-md-block">
-                    <div class="fw-bold fs-6 text-dark">Dida Nurwahidah</div>
-                    <div class="text-secondary small">Owner & Founder</div>
-                </div>
-                <div class="user-avatar">DN</div>
-            </div>
-        </header>
-
-        <main>
-            @yield('content')
-        </main>
+    <div id="main-content">
+        @yield('content')
     </div>
 
     <!-- Bootstrap 5 JS Bundle with Popper -->

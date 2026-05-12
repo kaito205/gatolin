@@ -137,14 +137,23 @@ class AdminController extends Controller
     public function updateOrderStatus(Request $request, $id)
     {
         $request->validate([
-            'status' => 'required|in:pending,dikemas,dikirim,completed,cancelled'
+            'status' => 'nullable|in:pending,dikemas,dikirim,completed,cancelled',
+            'payment_status' => 'nullable|in:belum_bayar,menunggu_verifikasi,lunas'
         ]);
 
         $order = \App\Models\Order::findOrFail($id);
-        $order->status = $request->status;
+        
+        if ($request->has('status')) {
+            $order->status = $request->status;
+        }
+
+        if ($request->has('payment_status')) {
+            $order->status_pembayaran = $request->payment_status;
+        }
+        
         $order->save();
 
-        return redirect()->back()->with('success', 'Status pesanan berhasil diperbarui!');
+        return redirect()->back()->with('success', 'Data pesanan berhasil diperbarui!');
     }
 
     public function deleteOrder($id)

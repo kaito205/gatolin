@@ -2,133 +2,125 @@
 
 @section('styles')
 <style>
+    :root {
+        --admin-bg: #f8fafc;
+        --admin-card: #ffffff;
+    }
+
+    .stat-card {
+        transition: all 0.3s ease;
+        border: 1px solid #f1f5f9;
+        background: #fff;
+    }
+    
+    .stat-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0,0,0,0.05) !important;
+    }
+
     .stat-icon-wrapper {
-        width: auto;
-        height: auto;
-        min-width: unset;
-        background: transparent !important;
+        width: 48px;
+        height: 48px;
+        border-radius: 12px;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 28px;
-        transition: all 0.3s ease;
+        font-size: 24px;
     }
     
     .product-img {
-        width: 50px;
-        height: 50px;
+        width: 45px;
+        height: 45px;
         border-radius: 10px;
         object-fit: cover;
+        border: 1px solid #f1f5f9;
     }
 
-    .table-custom th {
+    .badge-stock {
+        padding: 6px 12px;
+        border-radius: 50px;
+        font-size: 11px;
+        font-weight: 700;
+    }
+
+    .table thead th {
+        background: #f8fafc;
+        color: #64748b;
         font-size: 11px;
         text-transform: uppercase;
-        letter-spacing: 1.5px;
-        color: #94a3b8;
-        font-weight: 800;
-        border-bottom: 2px solid #f1f5f9;
-        padding: 20px 16px;
+        letter-spacing: 1px;
+        padding: 15px 20px;
+        border-bottom: 1px solid #e2e8f0;
     }
 
-    .table-custom td {
+    .table tbody td {
+        padding: 15px 20px;
         vertical-align: middle;
-        padding: 20px 16px;
-        color: #334155;
-        border-bottom: 1px solid #f8fafc;
+        color: #1e293b;
     }
-    
-    .table-hover tbody tr:hover {
-        background-color: #f8fafc;
-        transition: 0.2s;
-    }
-
-    .custom-shadow {
-        box-shadow: 0 4px 20px rgba(0,0,0,0.03) !important;
-    }
-    
-    /* Pagination Overrides */
-    .pagination { margin-bottom: 0; }
-    .page-link { color: #64748b; border-radius: 8px; margin: 0 4px; border: 1px solid #f1f5f9; font-weight: 600; padding: 10px 16px; }
-    .page-item.active .page-link { background-color: #db7093; border-color: #db7093; color: white; box-shadow: 0 4px 10px rgba(219,112,147,0.2); }
-    .page-link:hover { color: #be185d; background-color: #fff1f2; border-color: #fff1f2; }
 </style>
 @endsection
 
 @section('content')
 
+<div class="mb-4">
+    <h3 class="fw-bold text-dark mb-1">Ringkasan Bisnis</h3>
+    <p class="text-muted small">Pantau performa toko Anda hari ini</p>
+</div>
+
 <!-- Statistics Row -->
 <div class="row g-3 mb-5">
-    <!-- Total Products -->
     <div class="col-xl col-md-4">
-        <div class="card border-0 custom-shadow rounded-4 h-100 overflow-hidden">
-            <div class="card-body p-3 d-flex align-items-center gap-3">
-                <div class="stat-icon-wrapper text-primary">
+        <div class="card border-0 stat-card rounded-4 h-100 shadow-sm">
+            <div class="card-body p-4 d-flex align-items-center gap-3">
+                <div class="stat-icon-wrapper bg-primary bg-opacity-10 text-primary">
                     <i class="bi bi-bag-heart-fill"></i>
                 </div>
                 <div>
-                    <h6 class="text-secondary fw-bold text-uppercase mb-0" style="font-size: 10px; letter-spacing: 1px;">Katalog</h6>
-                    <h4 class="fw-bold text-dark mb-0">{{ $productCount }}</h4>
+                    <h6 class="text-muted fw-bold text-uppercase mb-1" style="font-size: 10px; letter-spacing: 1px;">Katalog</h6>
+                    <h3 class="fw-bold text-dark mb-0">{{ $productCount }}</h3>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Total Orders -->
     <div class="col-xl col-md-4">
-        <div class="card border-0 custom-shadow rounded-4 h-100 overflow-hidden">
-            <div class="card-body p-3 d-flex align-items-center gap-3">
-                <div class="stat-icon-wrapper text-info">
+        <div class="card border-0 stat-card rounded-4 h-100 shadow-sm">
+            <div class="card-body p-4 d-flex align-items-center gap-3">
+                <div class="stat-icon-wrapper bg-info bg-opacity-10 text-info">
                     <i class="bi bi-receipt"></i>
                 </div>
                 <div>
-                    <h6 class="text-secondary fw-bold text-uppercase mb-0" style="font-size: 10px; letter-spacing: 1px;">Pesanan</h6>
-                    <h4 class="fw-bold text-dark mb-0">{{ $orderCount }}</h4>
+                    <h6 class="text-muted fw-bold text-uppercase mb-1" style="font-size: 10px; letter-spacing: 1px;">Pesanan</h6>
+                    <h3 class="fw-bold text-dark mb-0">{{ $orderCount }}</h3>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Completed Orders -->
     <div class="col-xl col-md-4">
-        <div class="card border-0 custom-shadow rounded-4 h-100 overflow-hidden">
-            <div class="card-body p-3 d-flex align-items-center gap-3">
-                <div class="stat-icon-wrapper text-success">
+        <div class="card border-0 stat-card rounded-4 h-100 shadow-sm">
+            <div class="card-body p-4 d-flex align-items-center gap-3">
+                <div class="stat-icon-wrapper bg-success bg-opacity-10 text-success">
                     <i class="bi bi-check-all"></i>
                 </div>
                 <div>
-                    <h6 class="text-secondary fw-bold text-uppercase mb-0" style="font-size: 10px; letter-spacing: 1px;">Selesai</h6>
-                    <h4 class="fw-bold text-dark mb-0 text-success">{{ $completedOrders }}</h4>
+                    <h6 class="text-muted fw-bold text-uppercase mb-1" style="font-size: 10px; letter-spacing: 1px;">Selesai</h6>
+                    <h3 class="fw-bold text-success mb-0">{{ $completedOrders }}</h3>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Cancelled Orders -->
-    <div class="col-xl col-md-4">
-        <div class="card border-0 custom-shadow rounded-4 h-100 overflow-hidden">
-            <div class="card-body p-3 d-flex align-items-center gap-3">
-                <div class="stat-icon-wrapper text-danger">
-                    <i class="bi bi-x-lg"></i>
-                </div>
-                <div>
-                    <h6 class="text-secondary fw-bold text-uppercase mb-0" style="font-size: 10px; letter-spacing: 1px;">Batal</h6>
-                    <h4 class="fw-bold text-dark mb-0 text-danger">{{ $cancelledOrders }}</h4>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Total Revenue -->
-    <div class="col-xl col-md-8">
-        <div class="card border-0 custom-shadow rounded-4 h-100 text-white" style="background: linear-gradient(135deg, #db7093 0%, #be185d 100%);">
-            <div class="card-body p-3 d-flex align-items-center gap-3">
-                <div class="stat-icon-wrapper text-white">
+    <div class="col-xl col-md-12">
+        <div class="card border-0 stat-card rounded-4 h-100 text-white shadow-sm" style="background: linear-gradient(135deg, #db7093 0%, #be185d 100%);">
+            <div class="card-body p-4 d-flex align-items-center gap-3">
+                <div class="stat-icon-wrapper bg-white bg-opacity-20 text-white">
                     <i class="bi bi-wallet2"></i>
                 </div>
                 <div>
-                    <h6 class="text-white text-opacity-75 fw-bold text-uppercase mb-0" style="font-size: 10px; letter-spacing: 1px;">Pendapatan</h6>
-                    <h4 class="fw-bold mb-0">Rp {{ number_format($totalRevenue, 0, ',', '.') }}</h4>
+                    <h6 class="text-white text-opacity-75 fw-bold text-uppercase mb-1" style="font-size: 10px; letter-spacing: 1px;">Total Pendapatan</h6>
+                    <h3 class="fw-bold mb-0">Rp {{ number_format($totalRevenue, 0, ',', '.') }}</h3>
                 </div>
             </div>
         </div>
@@ -136,87 +128,64 @@
 </div>
 
 <!-- Inventory Table -->
-<div class="card border-0 custom-shadow rounded-4">
-    <div class="card-header bg-white border-bottom-0 p-4 pb-0 d-flex justify-content-between align-items-center">
-        <div>
-            <h5 class="fw-bold text-dark mb-1">Inventaris Produk</h5>
-            <p class="text-muted small mb-0">Kelola stok dan katalog Gantol.In Anda.</p>
-        </div>
-        <a href="{{ route('admin.products.create') }}" class="btn btn-accent px-3 py-2 rounded-3 d-flex align-items-center gap-2">
-            <i class="bi bi-plus-lg"></i> Tambah Baru
-        </a>
-    </div>
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h5 class="fw-bold text-dark mb-0">Inventaris Produk</h5>
+    <a href="{{ route('admin.products.create') }}" class="btn btn-accent px-4 py-2 rounded-pill d-flex align-items-center gap-2 shadow-sm">
+        <i class="bi bi-plus-lg"></i> Tambah Produk
+    </a>
+</div>
 
-    <div class="card-body p-0 mt-3">
-        @if(session('success'))
-            <div class="alert alert-success border-0 bg-success bg-opacity-10 text-success m-4 d-flex align-items-center gap-2" role="alert">
-                <i class="bi bi-check-circle-fill"></i>
-                {{ session('success') }}
-            </div>
-        @endif
-
-        <div class="table-responsive">
-            <table class="table table-hover table-custom mb-0">
-                <thead class="table-light">
-                    <tr>
-                        <th class="ps-4">Produk & Gambar</th>
-                        <th>Kategori</th>
-                        <th>Harga Retail</th>
-                        <th>Status Stok</th>
-                        <th class="pe-4">Tindakan</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach($products as $prod)
-                    <tr>
-                        <td class="ps-4">
-                            <div class="d-flex align-items-center gap-3">
-                                <img src="{{ asset('img/' . $prod->foto_produk) }}" class="product-img border" alt="Produk">
-                                <span class="fw-bold text-dark">{{ $prod->nama_produk }}</span>
-                            </div>
-                        </td>
-                        <td>
-                            <span class="text-secondary fw-medium">{{ optional($prod->kategori)->nama_kategori ?? 'Umum' }}</span>
-                        </td>
-                        <td>
-                            <span class="fw-bold text-dark">Rp {{ number_format($prod->harga_produk, 0, ',', '.') }}</span>
-                        </td>
-                        <td>
-                            @if($prod->stok_produk > 10)
-                                <span class="badge rounded-pill bg-success bg-opacity-10 text-success border border-success border-opacity-25 px-3 py-2">
-                                    {{ $prod->stok_produk }} Unit
-                                </span>
-                            @else
-                                <span class="badge rounded-pill bg-warning bg-opacity-10 text-warning border border-warning border-opacity-25 px-3 py-2">
-                                    {{ $prod->stok_produk }} Unit
-                                </span>
-                            @endif
-                        </td>
-                        <td class="pe-4">
-                            <div class="d-flex gap-2">
-                                <a href="{{ route('admin.products.edit', $prod->id_produk) }}" class="btn btn-sm btn-light text-primary border-0 bg-primary bg-opacity-10" title="Edit">
-                                    <i class="bi bi-pencil-square"></i>
-                                </a>
-                                <form action="{{ route('admin.products.delete', $prod->id_produk) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus produk ini?')">
-                                    @csrf 
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-sm btn-light text-danger border-0 bg-danger bg-opacity-10" title="Hapus">
-                                        <i class="bi bi-trash3"></i>
-                                    </button>
-                                </form>
-                            </div>
-                        </td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
-        
-        <!-- Pagination -->
-        <div class="d-flex justify-content-center p-4 border-top">
-            {{ $products->links('pagination::bootstrap-5') }}
-        </div>
+@if(session('success'))
+    <div class="alert alert-success border-0 shadow-sm rounded-3 mb-4 d-flex align-items-center">
+        <i class="bi bi-check-circle-fill me-2"></i> {{ session('success') }}
     </div>
+@endif
+
+<div class="card border-0 shadow-sm rounded-4 overflow-hidden">
+    <div class="table-responsive">
+        <table class="table table-hover mb-0">
+            <thead>
+                <tr>
+                    <th>Produk</th>
+                    <th>Kategori</th>
+                    <th>Harga</th>
+                    <th>Stok</th>
+                    <th class="text-center">Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($products as $prod)
+                <tr>
+                    <td>
+                        <div class="d-flex align-items-center gap-3">
+                            <img src="{{ asset('img/' . $prod->foto_produk) }}" class="product-img" alt="Produk">
+                            <span class="fw-bold">{{ $prod->nama_produk }}</span>
+                        </div>
+                    </td>
+                    <td><span class="text-muted small fw-medium">{{ optional($prod->kategori)->nama_kategori ?? 'Umum' }}</span></td>
+                    <td><span class="fw-bold">Rp {{ number_format($prod->harga_produk, 0, ',', '.') }}</span></td>
+                    <td>
+                        @php $sClass = $prod->stok_produk > 10 ? 'bg-success bg-opacity-10 text-success' : 'bg-warning bg-opacity-10 text-warning'; @endphp
+                        <span class="badge-stock {{ $sClass }}">{{ $prod->stok_produk }} Unit</span>
+                    </td>
+                    <td>
+                        <div class="d-flex justify-content-center gap-2">
+                            <a href="{{ route('admin.products.edit', $prod->id_produk) }}" class="btn btn-sm btn-outline-primary rounded-pill px-3 fw-bold">Edit</a>
+                            <form action="{{ route('admin.products.delete', $prod->id_produk) }}" method="POST" onsubmit="return confirm('Hapus?')">
+                                @csrf @method('DELETE')
+                                <button type="submit" class="btn btn-sm btn-outline-danger rounded-pill px-3 fw-bold">Hapus</button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="d-flex justify-content-center mt-4">
+    {{ $products->links('pagination::bootstrap-5') }}
 </div>
 
 @endsection

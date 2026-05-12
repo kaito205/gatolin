@@ -111,7 +111,9 @@ class CartController extends Controller
             'nama_pembeli' => 'required|string|max:255',
             'email_pembeli' => 'required|email|max:255',
             'telepon_pembeli' => 'required|string|max:20',
-            'alamat_pembeli' => 'required|string'
+            'alamat_pembeli' => 'required|string',
+            'metode_pembayaran' => 'required|string',
+            'bukti_pembayaran' => 'nullable|image|mimes:jpeg,png,jpg|max:2048'
         ]);
 
         $cart = session()->get('cart');
@@ -125,6 +127,17 @@ class CartController extends Controller
             $totalHarga += $details['harga_produk'] * $details['quantity'];
         }
 
+        $buktiName = null;
+        if ($request->hasFile('bukti_pembayaran')) {
+            $image = $request->file('bukti_pembayaran');
+            $buktiName = time() . '_' . auth()->id() . '.' . $image->getClientOriginalExtension();
+            $destinationPath = public_path('/img/bukti_pembayaran');
+            if (!file_exists($destinationPath)) {
+                mkdir($destinationPath, 0777, true);
+            }
+            $image->move($destinationPath, $buktiName);
+        }
+
         \Illuminate\Support\Facades\DB::beginTransaction();
         try {
             // Create Order
@@ -135,6 +148,9 @@ class CartController extends Controller
                 'telepon_pembeli' => $request->telepon_pembeli,
                 'alamat_pembeli' => $request->alamat_pembeli,
                 'total_harga' => $totalHarga,
+                'metode_pembayaran' => $request->metode_pembayaran,
+                'bukti_pembayaran' => $buktiName,
+                'status_pembayaran' => $buktiName ? 'menunggu_verifikasi' : 'belum_bayar',
                 'status' => 'pending'
             ]);
 

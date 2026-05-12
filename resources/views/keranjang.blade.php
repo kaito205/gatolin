@@ -13,6 +13,14 @@
     .total-label { font-size: 18px; color: #444; }
     .total-amount { font-size: 24px; font-weight: bold; color: var(--primary); }
     .btn-checkout { background: var(--primary); color: white; padding: 15px 40px; border-radius: 5px; text-decoration: none; font-weight: bold; font-size: 16px; border: none; cursor: pointer; }
+    
+    .payment-methods { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
+    .payment-option { border: 2px solid #eee; border-radius: 8px; padding: 12px; cursor: pointer; transition: all 0.3s; position: relative; display: flex; align-items: center; gap: 10px; }
+    .payment-option:hover { border-color: var(--primary); background: #fdf2f2; }
+    .payment-option input { display: none; }
+    .payment-option.active { border-color: var(--primary); background: #fdf2f2; }
+    .payment-option.active::after { content: '✓'; position: absolute; top: 5px; right: 8px; color: var(--primary); font-weight: bold; font-size: 12px; }
+    .payment-icon { width: 24px; height: 24px; object-fit: contain; }
 </style>
 @endsection
 
@@ -100,7 +108,7 @@
         <button onclick="document.getElementById('checkoutModal').style.display='none'" style="position: absolute; top: 15px; right: 15px; background: none; border: none; font-size: 20px; cursor: pointer;">&times;</button>
         <h3 style="margin-top: 0; margin-bottom: 20px; color: var(--primary);">Data Pengiriman</h3>
         
-        <form action="{{ route('checkout') }}" method="POST">
+        <form action="{{ route('checkout') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div style="margin-bottom: 15px;">
                 <label style="display: block; margin-bottom: 5px; font-weight: 500;">Nama Lengkap</label>
@@ -114,9 +122,31 @@
                 <label style="display: block; margin-bottom: 5px; font-weight: 500;">Nomor WhatsApp / Telepon</label>
                 <input type="text" name="telepon_pembeli" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;" placeholder="08123456789">
             </div>
-            <div style="margin-bottom: 20px;">
+            <div style="margin-bottom: 15px;">
                 <label style="display: block; margin-bottom: 5px; font-weight: 500;">Alamat Pengiriman Lengkap</label>
                 <textarea name="alamat_pembeli" required rows="3" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;" placeholder="Nama jalan, RT/RW, kelurahan, kecamatan, kota..."></textarea>
+            </div>
+            <div style="margin-bottom: 20px;">
+                <label style="display: block; margin-bottom: 10px; font-weight: 500;">Metode Pembayaran</label>
+                <div class="payment-methods">
+                    <label class="payment-option active" onclick="selectPayment(this)">
+                        <input type="radio" name="metode_pembayaran" value="Transfer Bank" checked>
+                        <span style="font-size: 14px;">Transfer Bank</span>
+                    </label>
+                    <label class="payment-option" onclick="selectPayment(this)">
+                        <input type="radio" name="metode_pembayaran" value="E-Wallet">
+                        <span style="font-size: 14px;">E-Wallet (OVO/DANA)</span>
+                    </label>
+                    <label class="payment-option" onclick="selectPayment(this)">
+                        <input type="radio" name="metode_pembayaran" value="COD">
+                        <span style="font-size: 14px;">Bayar di Tempat (COD)</span>
+                    </label>
+                </div>
+            </div>
+            <div id="bukti_container" style="margin-bottom: 20px;">
+                <label style="display: block; margin-bottom: 5px; font-weight: 500;">Unggah Bukti Pembayaran</label>
+                <input type="file" name="bukti_pembayaran" id="bukti_input" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 5px;">
+                <small style="color: #666; font-size: 11px;">(Wajib untuk Transfer/E-Wallet. Format: JPG/PNG, Max 2MB)</small>
             </div>
             <button type="submit" class="btn-checkout" style="width: 100%;">Proses Pesanan (Rp {{ number_format($total ?? 0, 0, ',', '.') }})</button>
         </form>
@@ -167,6 +197,32 @@
                     window.location.reload();
                 }
             });
+        }
+    });
+
+    function selectPayment(element) {
+        document.querySelectorAll('.payment-option').forEach(opt => opt.classList.remove('active'));
+        element.classList.add('active');
+        const radio = element.querySelector('input');
+        radio.checked = true;
+
+        const buktiContainer = document.getElementById('bukti_container');
+        const buktiInput = document.getElementById('bukti_input');
+        
+        if (radio.value === 'COD') {
+            buktiContainer.style.display = 'none';
+            buktiInput.required = false;
+        } else {
+            buktiContainer.style.display = 'block';
+            buktiInput.required = true;
+        }
+    }
+
+    // Initialize state
+    document.addEventListener('DOMContentLoaded', function() {
+        const activeRadio = document.querySelector('input[name="metode_pembayaran"]:checked');
+        if (activeRadio) {
+            selectPayment(activeRadio.parentElement);
         }
     });
 </script>

@@ -21,6 +21,9 @@ class Order extends Model
         'telepon_pembeli',
         'alamat_pembeli',
         'total_harga',
+        'metode_pembayaran',
+        'bukti_pembayaran',
+        'status_pembayaran',
         'status'
     ];
 

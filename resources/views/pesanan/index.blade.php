@@ -38,6 +38,11 @@
         .order-header { flex-direction: column; align-items: flex-start; }
         .order-footer { flex-direction: column; gap: 15px; align-items: flex-start; }
     }
+
+    .payment-status { font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 4px; display: inline-block; margin-top: 5px; }
+    .pay-belum { background: #fee2e2; color: #991b1b; }
+    .pay-menunggu { background: #fef3c7; color: #92400e; }
+    .pay-lunas { background: #dcfce7; color: #166534; }
 </style>
 @endsection
 
@@ -63,6 +68,21 @@
             <div>
                 <div class="order-id">ID Pesanan: #{{ $order->id_order }}</div>
                 <div class="order-date">Dipesan pada: {{ $order->created_at->format('d M Y, H:i') }}</div>
+                <div style="font-size: 13px; color: var(--primary); font-weight: 600; margin-top: 5px;">
+                    <i class="fas fa-credit-card"></i> {{ $order->metode_pembayaran ?? 'Belum memilih' }}
+                </div>
+                @php
+                    $payStatusClass = 'pay-belum';
+                    $payStatusLabel = 'Belum Bayar';
+                    if($order->status_pembayaran == 'menunggu_verifikasi') {
+                        $payStatusClass = 'pay-menunggu';
+                        $payStatusLabel = 'Menunggu Verifikasi';
+                    } elseif($order->status_pembayaran == 'lunas') {
+                        $payStatusClass = 'pay-lunas';
+                        $payStatusLabel = 'Pembayaran Lunas';
+                    }
+                @endphp
+                <span class="payment-status {{ $payStatusClass }}">{{ $payStatusLabel }}</span>
             </div>
             @php
                 $statusClass = 'status-' . strtolower($order->status);
@@ -114,6 +134,13 @@
                 </form>
                 @endif
             </div>
+            
+            @if($order->status_pembayaran == 'menunggu_verifikasi')
+            <div style="margin-top: 15px; padding: 10px 15px; background: #fffbeb; border-radius: 8px; color: #92400e; font-size: 13px; font-weight: 500;">
+                <i class="fas fa-info-circle me-1"></i> Bukti pembayaran telah diunggah. Kami sedang memverifikasi pembayaran Anda.
+            </div>
+            @endif
+
             <div style="text-align: right;">
                 <div style="color: var(--text-light); font-size: 14px;">Total Pesanan</div>
                 <div class="total-price">Rp {{ number_format($order->total_harga, 0, ',', '.') }}</div>
