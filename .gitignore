@@ -1,8 +1,14 @@
 *.log
 .DS_Store
+
+# Environment Variables (NEVER commit these files!)
 .env
 .env.backup
 .env.production
+.env.local
+.env.*.local
+
+# IDE
 .phpactor.json
 .phpunit.result.cache
 /.fleet
@@ -11,14 +17,22 @@
 /.phpunit.cache
 /.vscode
 /.zed
+
+# Authentication & Secrets
 /auth.json
+
+# Dependencies
 /node_modules
+/vendor
+
+# Build & Cache
 /public/build
 /public/hot
 /public/storage
 /storage/*.key
 /storage/pail
-/vendor
+
+# OS Files
 Homestead.json
 Homestead.yaml
 Thumbs.db
