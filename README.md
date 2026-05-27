@@ -22,6 +22,8 @@ Gantolin adalah aplikasi e-commerce modern yang dibangun dengan **Laravel 12** d
 
 ### Untuk Pelanggan
 
+<<<<<<< HEAD
+
 - **Browsing Produk**: Jelajahi katalog produk dengan kategori yang terorganisir
 - **Sistem Keranjang**: Tambah, hapus, dan perbarui jumlah produk di keranjang
 - **Checkout**: Proses pembelian yang aman dan cepat
@@ -80,11 +82,78 @@ cd gantolin
 
 Jalankan script setup yang telah dikonfigurasi:
 
+=======
+
+- **Browsing Produk**: Jelajahi katalog produk dengan kategori yang terorganisir
+- **Sistem Keranjang**: Tambah, hapus, dan perbarui jumlah produk di keranjang
+- **Checkout**: Proses pembelian yang aman dan cepat
+- **Manajemen Pesanan**: Lihat, lacak, dan batalkan pesanan
+- **Autentikasi**: Pendaftaran dan login pengguna yang aman
+- **Buy Now**: Pembelian cepat tanpa perlu menambah ke keranjang terlebih dahulu
+
+### Untuk Administrator
+
+- **Dashboard**: Ringkasan statistik penjualan dan performa
+- **Manajemen Produk**:
+    - Membuat produk baru
+    - Mengedit informasi produk
+    - Menghapus produk
+    - Mengelola kategori
+- **Manajemen Pesanan**:
+    - Melihat semua pesanan
+    - Memperbarui status pesanan
+    - Menghapus pesanan
+- **Laporan**: Analisis penjualan dan revenue
+- **Login Admin**: Akses kontrol berbasis autentikasi
+
+---
+
+## 🔧 Prasyarat
+
+Pastikan sistem Anda memiliki:
+
+- **PHP** 8.2 atau lebih tinggi
+- **Composer** (untuk manajemen dependency PHP)
+- **Node.js** 16+ dan **npm** (untuk build frontend)
+- **Database** (SQLite default, dapat diubah ke MySQL/PostgreSQL)
+- **Git** (opsional, untuk version control)
+
+### Cara Memverifikasi Instalasi
+
+```bash
+php --version
+composer --version
+node --version
+npm --version
+```
+
+---
+
+## 📦 Instalasi
+
+### 1. Clone Repository
+
+```bash
+git clone https://github.com/kaito205/gatolin.git
+cd gatolin
+```
+
+### 2. Setup Otomatis (Rekomendasi)
+
+Jalankan script setup yang telah dikonfigurasi:
+
+> > > > > > > 1f3e6ef188719f822113f40e7b344326c57c4fda
+
 ```bash
 composer setup
 ```
 
 Script ini akan secara otomatis:
+<<<<<<< HEAD
+
+=======
+
+> > > > > > > 1f3e6ef188719f822113f40e7b344326c57c4fda
 
 - Menginstal dependency PHP dengan Composer
 - Menyalin file `.env.example` ke `.env`
@@ -99,11 +168,23 @@ Jika Anda lebih suka melakukan setup secara manual:
 
 #### a. Instalasi Dependency PHP
 
+<<<<<<< HEAD
+
+=======
+
+> > > > > > > 1f3e6ef188719f822113f40e7b344326c57c4fda
+
 ```bash
 composer install
 ```
 
 #### b. Konfigurasi Environment
+
+<<<<<<< HEAD
+
+=======
+
+> > > > > > > 1f3e6ef188719f822113f40e7b344326c57c4fda
 
 ```bash
 cp .env.example .env
@@ -112,17 +193,35 @@ php artisan key:generate
 
 #### c. Setup Database
 
+<<<<<<< HEAD
+
+=======
+
+> > > > > > > 1f3e6ef188719f822113f40e7b344326c57c4fda
+
 ```bash
 php artisan migrate
 ```
 
 #### d. Instalasi Dependency Frontend
 
+<<<<<<< HEAD
+
+=======
+
+> > > > > > > 1f3e6ef188719f822113f40e7b344326c57c4fda
+
 ```bash
 npm install
 ```
 
 #### e. Build Frontend Assets
+
+<<<<<<< HEAD
+
+=======
+
+> > > > > > > 1f3e6ef188719f822113f40e7b344326c57c4fda
 
 ```bash
 npm run build
@@ -173,6 +272,11 @@ MAIL_FROM_ADDRESS="noreply@gantolin.com"
 **Default**: SQLite (file database/database.sqlite)
 
 **Untuk MySQL**:
+<<<<<<< HEAD
+
+=======
+
+> > > > > > > 1f3e6ef188719f822113f40e7b344326c57c4fda
 
 ```env
 DB_CONNECTION=mysql
@@ -184,6 +288,11 @@ DB_PASSWORD=your_password
 ```
 
 Kemudian jalankan migrasi:
+<<<<<<< HEAD
+
+=======
+
+> > > > > > > 1f3e6ef188719f822113f40e7b344326c57c4fda
 
 ```bash
 php artisan migrate
@@ -202,6 +311,11 @@ composer dev
 ```
 
 Ini akan membuka:
+<<<<<<< HEAD
+
+=======
+
+> > > > > > > 1f3e6ef188719f822113f40e7b344326c57c4fda
 
 - **PHP Development Server**: http://localhost:8000
 - **Vite HMR**: Hot reload untuk frontend assets
@@ -300,20 +414,21 @@ gantolin/
 
 ### Routes Publik (Tanpa Autentikasi)
 
-| Method | Route               | Controller                  | Deskripsi                        |
+<<<<<<< HEAD
+| Method | Route | Controller | Deskripsi |
 | ------ | ------------------- | --------------------------- | -------------------------------- |
-| GET    | `/`                 | -                           | Halaman utama dengan produk acak |
-| GET    | `/produk`           | ProdukController@index      | Daftar semua produk              |
-| GET    | `/produk/{id}`      | ProdukController@show       | Detail produk                    |
-| GET    | `/keranjang`        | CartController@index        | Lihat keranjang                  |
-| GET    | `/add-to-cart/{id}` | CartController@add          | Tambah ke keranjang              |
-| GET    | `/buy-now/{id}`     | CartController@buyNow       | Beli langsung                    |
-| PATCH  | `/update-cart`      | CartController@update       | Update jumlah produk             |
-| DELETE | `/remove-from-cart` | CartController@remove       | Hapus dari keranjang             |
-| GET    | `/login`            | AuthController@showLogin    | Halaman login                    |
-| POST   | `/login`            | AuthController@login        | Proses login                     |
-| GET    | `/register`         | AuthController@showRegister | Halaman registrasi               |
-| POST   | `/register`         | AuthController@register     | Proses registrasi                |
+| GET | `/` | - | Halaman utama dengan produk acak |
+| GET | `/produk` | ProdukController@index | Daftar semua produk |
+| GET | `/produk/{id}` | ProdukController@show | Detail produk |
+| GET | `/keranjang` | CartController@index | Lihat keranjang |
+| GET | `/add-to-cart/{id}` | CartController@add | Tambah ke keranjang |
+| GET | `/buy-now/{id}` | CartController@buyNow | Beli langsung |
+| PATCH | `/update-cart` | CartController@update | Update jumlah produk |
+| DELETE | `/remove-from-cart` | CartController@remove | Hapus dari keranjang |
+| GET | `/login` | AuthController@showLogin | Halaman login |
+| POST | `/login` | AuthController@login | Proses login |
+| GET | `/register` | AuthController@showRegister | Halaman registrasi |
+| POST | `/register` | AuthController@register | Proses registrasi |
 
 ### Routes Dengan Autentikasi (User)
 
@@ -341,6 +456,50 @@ gantolin/
 | POST   | `/admin/products/{id}/update` | AdminController@updateProduct     | Update produk         |
 | DELETE | `/admin/products/{id}`        | AdminController@deleteProduct     | Hapus produk          |
 
+=======
+| Method | Route | Controller | Deskripsi |
+|--------|-------|-----------|-----------|
+| GET | `/` | - | Halaman utama dengan produk acak |
+| GET | `/produk` | ProdukController@index | Daftar semua produk |
+| GET | `/produk/{id}` | ProdukController@show | Detail produk |
+| GET | `/keranjang` | CartController@index | Lihat keranjang |
+| GET | `/add-to-cart/{id}` | CartController@add | Tambah ke keranjang |
+| GET | `/buy-now/{id}` | CartController@buyNow | Beli langsung |
+| PATCH | `/update-cart` | CartController@update | Update jumlah produk |
+| DELETE | `/remove-from-cart` | CartController@remove | Hapus dari keranjang |
+| GET | `/login` | AuthController@showLogin | Halaman login |
+| POST | `/login` | AuthController@login | Proses login |
+| GET | `/register` | AuthController@showRegister | Halaman registrasi |
+| POST | `/register` | AuthController@register | Proses registrasi |
+
+### Routes Dengan Autentikasi (User)
+
+| Method | Route                  | Controller              | Deskripsi           |
+| ------ | ---------------------- | ----------------------- | ------------------- |
+| POST   | `/logout`              | AuthController@logout   | Logout pengguna     |
+| POST   | `/checkout`            | CartController@checkout | Checkout pesanan    |
+| GET    | `/pesanan`             | OrderController@index   | Daftar pesanan user |
+| POST   | `/pesanan/{id}/cancel` | OrderController@cancel  | Batalkan pesanan    |
+| DELETE | `/pesanan/{id}`        | OrderController@destroy | Hapus pesanan       |
+
+### Routes Admin
+
+| Method | Route                         | Controller                        | Deskripsi             |
+| ------ | ----------------------------- | --------------------------------- | --------------------- |
+| GET    | `/admin/login`                | -                                 | Halaman login admin   |
+| GET    | `/admin/dashboard`            | AdminController@dashboard         | Dashboard admin       |
+| GET    | `/admin/orders`               | AdminController@orders            | Daftar pesanan        |
+| POST   | `/admin/orders/{id}/status`   | AdminController@updateOrderStatus | Update status pesanan |
+| DELETE | `/admin/orders/{id}`          | AdminController@deleteOrder       | Hapus pesanan         |
+| GET    | `/admin/reports`              | AdminController@reports           | Laporan penjualan     |
+| GET    | `/admin/products/create`      | AdminController@createProduct     | Form buat produk      |
+| POST   | `/admin/products`             | AdminController@storeProduct      | Simpan produk baru    |
+| GET    | `/admin/products/{id}/edit`   | AdminController@editProduct       | Form edit produk      |
+| POST   | `/admin/products/{id}/update` | AdminController@updateProduct     | Update produk         |
+| DELETE | `/admin/products/{id}`        | AdminController@deleteProduct     | Hapus produk          |
+
+> > > > > > > 1f3e6ef188719f822113f40e7b344326c57c4fda
+
 ---
 
 ## 🗄️ Database
@@ -348,6 +507,12 @@ gantolin/
 ### Models Utama
 
 #### User
+
+<<<<<<< HEAD
+
+=======
+
+> > > > > > > 1f3e6ef188719f822113f40e7b344326c57c4fda
 
 - id
 - name
@@ -359,6 +524,12 @@ gantolin/
 - updated_at
 
 #### Product
+
+<<<<<<< HEAD
+
+=======
+
+> > > > > > > 1f3e6ef188719f822113f40e7b344326c57c4fda
 
 - id
 - name
@@ -372,6 +543,12 @@ gantolin/
 
 #### Category
 
+<<<<<<< HEAD
+
+=======
+
+> > > > > > > 1f3e6ef188719f822113f40e7b344326c57c4fda
+
 - id
 - name
 - description
@@ -379,6 +556,12 @@ gantolin/
 - updated_at
 
 #### Order
+
+<<<<<<< HEAD
+
+=======
+
+> > > > > > > 1f3e6ef188719f822113f40e7b344326c57c4fda
 
 - id
 - user_id
@@ -389,6 +572,12 @@ gantolin/
 
 #### OrderItem
 
+<<<<<<< HEAD
+
+=======
+
+> > > > > > > 1f3e6ef188719f822113f40e7b344326c57c4fda
+
 - id
 - order_id
 - product_id
@@ -398,6 +587,12 @@ gantolin/
 - updated_at
 
 #### Cart (Session-based)
+
+<<<<<<< HEAD
+
+=======
+
+> > > > > > > 1f3e6ef188719f822113f40e7b344326c57c4fda
 
 - Disimpan di session database
 - user_id
@@ -450,6 +645,11 @@ Ini akan menjalankan semua test di direktori `tests/`.
 3. Tulis test methods yang dimulai dengan `test`
 
 Contoh:
+<<<<<<< HEAD
+
+=======
+
+> > > > > > > 1f3e6ef188719f822113f40e7b344326c57c4fda
 
 ```php
 public function test_user_can_login()
@@ -458,7 +658,11 @@ public function test_user_can_login()
         'email' => 'user@example.com',
         'password' => 'password'
     ]);
+<<<<<<< HEAD
 
+=======
+
+>>>>>>> 1f3e6ef188719f822113f40e7b344326c57c4fda
     $response->assertRedirect('/');
 }
 ```
@@ -470,6 +674,11 @@ public function test_user_can_login()
 ### 1. Error: "No such file or directory" pada migration
 
 **Solusi:**
+<<<<<<< HEAD
+
+=======
+
+> > > > > > > 1f3e6ef188719f822113f40e7b344326c57c4fda
 
 ```bash
 php artisan migrate:fresh
@@ -478,6 +687,11 @@ php artisan migrate:fresh
 ### 2. Vite assets tidak load
 
 **Solusi:**
+<<<<<<< HEAD
+
+=======
+
+> > > > > > > 1f3e6ef188719f822113f40e7b344326c57c4fda
 
 ```bash
 npm run build
@@ -488,6 +702,11 @@ npm run dev
 ### 3. Database permission denied
 
 **Solusi:**
+<<<<<<< HEAD
+
+=======
+
+> > > > > > > 1f3e6ef188719f822113f40e7b344326c57c4fda
 
 ```bash
 chmod 666 database/database.sqlite
@@ -497,6 +716,11 @@ chmod 755 database/
 ### 4. Composer "out of memory"
 
 **Solusi:**
+<<<<<<< HEAD
+
+=======
+
+> > > > > > > 1f3e6ef188719f822113f40e7b344326c57c4fda
 
 ```bash
 php -d memory_limit=-1 composer install
@@ -505,6 +729,11 @@ php -d memory_limit=-1 composer install
 ### 5. Node modules conflict
 
 **Solusi:**
+<<<<<<< HEAD
+
+=======
+
+> > > > > > > 1f3e6ef188719f822113f40e7b344326c57c4fda
 
 ```bash
 rm -rf node_modules
@@ -515,6 +744,11 @@ npm install
 ### 6. Laravel key not set
 
 **Solusi:**
+<<<<<<< HEAD
+
+=======
+
+> > > > > > > 1f3e6ef188719f822113f40e7b344326c57c4fda
 
 ```bash
 php artisan key:generate
@@ -523,6 +757,11 @@ php artisan key:generate
 ### 7. Queue jobs tidak dijalankan
 
 **Pastikan running:**
+<<<<<<< HEAD
+
+=======
+
+> > > > > > > 1f3e6ef188719f822113f40e7b344326c57c4fda
 
 ```bash
 php artisan queue:listen
@@ -534,6 +773,12 @@ php artisan queue:listen
 
 ### Backend
 
+<<<<<<< HEAD
+
+=======
+
+> > > > > > > 1f3e6ef188719f822113f40e7b344326c57c4fda
+
 - **Laravel 12**: Framework PHP modern
 - **PHP 8.2+**: Bahasa pemrograman
 - **SQLite/MySQL**: Database
@@ -541,12 +786,24 @@ php artisan queue:listen
 
 ### Frontend
 
+<<<<<<< HEAD
+
+=======
+
+> > > > > > > 1f3e6ef188719f822113f40e7b344326c57c4fda
+
 - **Tailwind CSS 4.0**: Utility-first CSS framework
 - **Vite 7.0**: Build tool & dev server
 - **JavaScript ES6+**: Bahasa pemrograman
 - **Axios**: HTTP client
 
 ### Development & Testing
+
+<<<<<<< HEAD
+
+=======
+
+> > > > > > > 1f3e6ef188719f822113f40e7b344326c57c4fda
 
 - **PHPUnit**: Framework testing PHP
 - **Laravel Pint**: Code formatter PHP
@@ -567,6 +824,12 @@ Kami menerima kontribusi! Berikut langkah-langkahnya:
 
 ### Guidelines
 
+<<<<<<< HEAD
+
+=======
+
+> > > > > > > 1f3e6ef188719f822113f40e7b344326c57c4fda
+
 - Ikuti PSR-12 code style
 - Tambahkan test untuk fitur baru
 - Update README jika ada perubahan
@@ -582,7 +845,11 @@ Aplikasi ini dilisensikan di bawah [MIT License](LICENSE).
 
 ## 👨‍💻 Author
 
-- **Repository**: https://github.com/kaito205/gantolin
+<<<<<<< HEAD
+
+- # **Repository**: https://github.com/kaito205/gantolin
+- **Repository**: https://github.com/kaito205/gatolin
+    > > > > > > > 1f3e6ef188719f822113f40e7b344326c57c4fda
 - **Maintainer**: kaito205
 
 ---
@@ -591,9 +858,13 @@ Aplikasi ini dilisensikan di bawah [MIT License](LICENSE).
 
 Jika Anda memiliki pertanyaan atau masalah:
 
-1. Periksa [Issues](https://github.com/kaito205/gantolin/issues) yang ada
-2. Buat issue baru dengan detail yang jelas
-3. Sertakan error messages dan langkah reproduksi
+<<<<<<< HEAD
+
+1. # Periksa [Issues](https://github.com/kaito205/gantolin/issues) yang ada
+1. Periksa [Issues](https://github.com/kaito205/gatolin/issues) yang ada
+    > > > > > > > 1f3e6ef188719f822113f40e7b344326c57c4fda
+1. Buat issue baru dengan detail yang jelas
+1. Sertakan error messages dan langkah reproduksi
 
 ---
 
